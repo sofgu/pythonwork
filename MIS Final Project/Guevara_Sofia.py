@@ -20,21 +20,28 @@ def print_menu():
     print("2. Drop course")
     print("3. Print student's schedule")
     print("4. Print course schedule")
-    print("5. Plot a bar graph with unique numbers on the x-axis\n
-          ("and capacity/actual enrollment on the y-axis")
+    print("5. Plot a bar graph with unique numbers on the x-axis,"+
+          "\n capacity and actual enrollment on the Y-axis.")
     print("6. Done")
     print()
           
 #Define getuseroption function
 def getuseroption():
-    useroption = int(input("Enter a number 1-6 corresponding to menu\n
-                           ("option desired")
+    
+    useroption = input("Enter a number 1-6 corresponding to menu\n" +
+                           "option desired")
+    try:
+        useroption = int(useroption)
+    except:
+        print("Must be an integer.")
+        getuseroption()
+        
     #print blank line
     print("\n")
-    
-    while useroption != '1' and useroption != '2' and useroption != '3'\n
-                           and useroption != '4' and useroption != '5'\n
-                           and useroption != '6'
+   
+ 
+    while (useroption != '1' and useroption != '2' and useroption != '3'
+           and useroption != '4' and useroption != '5' and useroption != '6'):
         print("You have entered an invalid choice.")
         getuseroption()
                            
@@ -109,7 +116,7 @@ def write_to_file(dictionary,outfile):
                            
 def main():
     student_file = open(student_input, 'r')
-    course_file = open(coure_input, 'r')
+    course_file = open(course_input, 'r')
     student_dict=process_students(student_file)
     course_dict=process_courses(course_file)
     print_menu()
@@ -118,6 +125,8 @@ def main():
         if choice == '1':
             eid = get_eid(student_dict)
             student_object = student_dict[eid]
+            unique = get_unique_number(course_dict)
+            
                            
 
                                            
