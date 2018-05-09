@@ -21,27 +21,22 @@ def print_menu():
     print("3. Print student's schedule")
     print("4. Print course schedule")
     print("5. Plot a bar graph with unique numbers on the x-axis,"+
-          "\n capacity and actual enrollment on the Y-axis.")
+          "\n   capacity and actual enrollment on the Y-axis.")
     print("6. Done")
     print()
           
 #Define getuseroption function
 def getuseroption():
     
-    useroption = input("Enter a number 1-6 corresponding to menu\n" +
-                           "option desired")
+    useroption = input("Choose a menu option (1-6): ")
     try:
         useroption = int(useroption)
     except:
         print("Must be an integer.")
         getuseroption()
-        
-    #print blank line
-    print("\n")
-   
  
-    while (useroption != '1' and useroption != '2' and useroption != '3'
-           and useroption != '4' and useroption != '5' and useroption != '6'):
+    while (useroption != 1 and useroption != 2 and useroption != 3
+           and useroption != 4 and useroption != 5 and useroption != 6):
         print("You have entered an invalid choice.")
         getuseroption()
                            
@@ -121,15 +116,66 @@ def main():
     course_dict=process_courses(course_file)
     print_menu()
     choice = getuseroption()
-    while choice != '6':
-        if choice == '1':
+    while choice != 6:
+        if choice == 1:
             eid = get_eid(student_dict)
             student_object = student_dict[eid]
             unique = get_unique_number(course_dict)
+            course_object = course_dict[unique]
+            while course_object.space_available() == False:
+                print('Error. Course is full. Please pick a new course.')
+                unique = get_unique_number(course_dict)
+                course_object = course_dict[unique]
+            while student_object.add_class(unique) == False:
+                unique = get_unique_number(course_dict)
+                course_object=course_dict[unique]
+                while course_object.space_available()==False:
+                    print('Error. Course is full. Please pick a new course')
+                    unique=get_unique_number(course_dict)
+                    course_object=course_dict[unique]
+            course_object.enroll_student()
+            print('Student',eid,'enrolled in', unique)
             
-                           
+        elif choice == 2:
+            eid=get_eid(student_dict)
+            student_object=student_dict[eid]
+            unique=get_unique_number(course_dict)
+            course_object=course_dict[unique]
+            while student_object.drop_class(unique)==False:
+                unique=get_unique_number(course_dict)
+                course_object=course_dict[unique]
+                
+            course_object.drop_student()
+            print('Student',eid,'dropped from', unique)
+            
+        elif choice == 3:
+            eid = get_eid(student_dict)
+            student_object=student_dict[eid]
+            print_student(student_object,student_dict,course_dict)
 
-                                           
+        elif choice == 4:
+            print_course_schedule(course_dict)
+
+        print()
+        print_menu()
+        choice = getuseroption()
+        
+    updated_student_file=open('students-updated.txt','w')
+    updated_course_file=open('courses-updated.txt','w')
+
+    write_to_file(student_dict,updated_student_file)
+    write_to_file(course_dict,updated_course_file)
+    
+    
+    updated_student_file.close()
+    updated_course_file.close()
+    student_file.close()
+    course_file.close()
+
+
+#call main
+main()
+            
 
     
     
