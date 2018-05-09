@@ -11,7 +11,9 @@ courses_input = "courses-updated.txt"
 import student
 #import course class file to create objects
 import course
-
+#import matplot lib and numpy for bar graph in option 5
+import numpy as np
+import matplotlib as plt
     
 #define print_menu function
 def print_menu():
@@ -109,45 +111,44 @@ def write_to_file(dictionary,outfile):
         line=this_object.line_for_file()
         outfile.write(line)
 
-def print_bar_graph(course_object, course_dict): 
-    for item in iterableobject:
-        
-        capacity_object = course_dict[unique]
-        course_capacity = capacity_object.get_capacity()
-        
-    for course_object in i
-        enrollment_object = course_dict[unique]
-        course_enrollment = enrollment_object.get_seats_taken()
-    import numpy as np
-    import matplotlib as plt
-
-    N = 2
-    ind = np.arrange(N)
-    width = 0.27
-
-    fig = plt.figure()
-    ax = fig.add_subpplot(111)
-
-    yval = course_capacity
-    rects1 = ax.bar(ind, yval, width, color ='r')
-    zval = course_enrollment
-    rects2 = ax.bar(ind+width, zval, width, color = 'g')
-
-    ax.set_ylabel('Capacity and Enrollment')
-    ax.set_xticks(ind+width)
-    ax.set_xticklabels(('Course:', unique))
-    ax.legend((rects1[0], rects2[0]),('Capacity', 'Enrollment'))
-
-    def autolabel(rects):
-        for rect in rects:
-            h = rect.get_height()
-            ax.text(rext.get_x()+rect.get_width()/2., 1.05*h, '%d'%int(h),
-                    ha = 'center', va = 'bottom')
-    autolabel(rects1)
-    autolabel(rects2)
-
-    plt.show()
-    
+###def print_bar_graph(course_object, course_dict): 
+##    for item in iterableobject:
+##        
+##        capacity_object = course_dict[unique]
+##        course_capacity = capacity_object.get_capacity()
+##        
+##    for course_object in i
+##        enrollment_object = course_dict[unique]
+##        course_enrollment = enrollment_object.get_seats_taken()
+##    
+##
+##    N = 2
+##    ind = np.arrange(N)
+##    width = 0.27
+##
+##    fig = plt.figure()
+##    ax = fig.add_subpplot(111)
+##
+##    yval = course_capacity
+##    rects1 = ax.bar(ind, yval, width, color ='r')
+##    zval = course_enrollment
+##    rects2 = ax.bar(ind+width, zval, width, color = 'g')
+##
+##    ax.set_ylabel('Capacity and Enrollment')
+##    ax.set_xticks(ind+width)
+##    ax.set_xticklabels(('Course:', unique))
+##    ax.legend((rects1[0], rects2[0]),('Capacity', 'Enrollment'))
+##
+##    def autolabel(rects):
+##        for rect in rects:
+##            h = rect.get_height()
+##            ax.text(rext.get_x()+rect.get_width()/2., 1.05*h, '%d'%int(h),
+##                    ha = 'center', va = 'bottom')
+##    autolabel(rects1)
+##    autolabel(rects2)
+##
+##    plt.show()
+##    
     
 
     
