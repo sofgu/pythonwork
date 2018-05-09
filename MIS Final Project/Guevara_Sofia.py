@@ -108,6 +108,50 @@ def write_to_file(dictionary,outfile):
         this_object=dictionary[key]
         line=this_object.line_for_file()
         outfile.write(line)
+
+def print_bar_graph(course_object, course_dict): 
+    for item in iterableobject:
+        
+        capacity_object = course_dict[unique]
+        course_capacity = capacity_object.get_capacity()
+        
+    for course_object in i
+        enrollment_object = course_dict[unique]
+        course_enrollment = enrollment_object.get_seats_taken()
+    import numpy as np
+    import matplotlib as plt
+
+    N = 2
+    ind = np.arrange(N)
+    width = 0.27
+
+    fig = plt.figure()
+    ax = fig.add_subpplot(111)
+
+    yval = course_capacity
+    rects1 = ax.bar(ind, yval, width, color ='r')
+    zval = course_enrollment
+    rects2 = ax.bar(ind+width, zval, width, color = 'g')
+
+    ax.set_ylabel('Capacity and Enrollment')
+    ax.set_xticks(ind+width)
+    ax.set_xticklabels(('Course:', unique))
+    ax.legend((rects1[0], rects2[0]),('Capacity', 'Enrollment'))
+
+    def autolabel(rects):
+        for rect in rects:
+            h = rect.get_height()
+            ax.text(rext.get_x()+rect.get_width()/2., 1.05*h, '%d'%int(h),
+                    ha = 'center', va = 'bottom')
+    autolabel(rects1)
+    autolabel(rects2)
+
+    plt.show()
+    
+    
+
+    
+    
                            
 def main():
     student_file = open(student_input, 'r')
@@ -117,7 +161,10 @@ def main():
     print_menu()
     choice = getuseroption()
     while choice != 6:
-        if choice == 1:
+        if choice == 6:
+            updated_info()
+        
+        elif choice == 1:
             eid = get_eid(student_dict)
             student_object = student_dict[eid]
             unique = get_unique_number(course_dict)
@@ -156,6 +203,11 @@ def main():
         elif choice == 4:
             print_course_schedule(course_dict)
 
+        elif choice == 5:
+            unique = get_unique_number(course_dict)
+            course_object= course_dict[unique]
+            print_bar_graph(course_object, course_dict)
+
         print()
         print_menu()
         choice = getuseroption()
@@ -171,6 +223,7 @@ def main():
     updated_course_file.close()
     student_file.close()
     course_file.close()
+
 
 
 #call main
